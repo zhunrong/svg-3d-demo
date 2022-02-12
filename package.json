@@ -1,0 +1,19 @@
+{
+  "name": "svg-3-d-demo",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "libs",
+    "types"
+  ],
+  "scripts": {
+    "dev": "scaffold dev"
+  },
+  "devDependencies": {
+    "@chenzr/vue-scaffold": "^0.5.1"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.4.3"
+  }
+}
