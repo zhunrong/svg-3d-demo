@@ -5,14 +5,14 @@ export class Cube extends Geometry {
   constructor(size: number) {
     const half = size / 2;
     const vertices: vec3[] = [
-      vec3.fromValues(-half, half, -half),
-      vec3.fromValues(half, half, -half),
-      vec3.fromValues(-half, -half, -half),
-      vec3.fromValues(half, -half, -half),
       vec3.fromValues(-half, half, half),
       vec3.fromValues(half, half, half),
       vec3.fromValues(-half, -half, half),
       vec3.fromValues(half, -half, half),
+      vec3.fromValues(-half, half, -half),
+      vec3.fromValues(half, half, -half),
+      vec3.fromValues(-half, -half, -half),
+      vec3.fromValues(half, -half, -half),
     ];
     const faces: Face[] = [
       // 正面

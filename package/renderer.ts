@@ -3,18 +3,18 @@ import { Camera } from './camera';
 import { mat4, vec4, vec3 } from 'gl-matrix';
 
 export class SVGRenderer {
-  size = [1,1];
-  setSize(width: number, height: number) {
-    this.size[0] = width / 2;
-    this.size[1] = height / 2;
-  }
+
   render(scene: Scene, camera: Camera) {
     const line1 = vec3.create();
     const line2 = vec3.create();
     const normal = vec3.create();
+    const minSize = Math.min(scene.width, scene.height) * 0.5;
+    // const minSize = 1;
+    const viewProjectMatrix = mat4.create();
+    mat4.multiply(viewProjectMatrix, camera.projectMatrix, camera.viewMatrix);
     scene.children.forEach((child) => {
       const matrix = mat4.create();
-      mat4.multiply(matrix, camera.projectMatrix, child.modelMatrix);
+      mat4.multiply(matrix, viewProjectMatrix, child.modelMatrix);
 
       child.faces.forEach((face, faceIndex) => {
         const coords = face.map((vertexIndex) => {
@@ -25,7 +25,7 @@ export class SVGRenderer {
         });
         const path = coords
           .map((coord, index) => {
-            return `${index === 0 ? 'M' : 'L'}${coord[0] * this.size[0]},${coord[1] * this.size[1]}`;
+            return `${index === 0 ? 'M' : 'L'}${coord[0] * minSize},${-coord[1] * minSize}`;
           })
           .join(' ');
         const pathElement = child.el.children[faceIndex];
@@ -35,7 +35,10 @@ export class SVGRenderer {
         vec3.subtract(line2, coords[2], coords[1]);
         vec3.cross(normal, line1, line2);
 
-        pathElement.setAttribute('fill', normal[2] < 0 ? child.colors[faceIndex] : 'none');
+        pathElement.setAttribute(
+          'fill',
+          normal[2] > 0 ? child.colors[faceIndex] : 'none'
+        );
       });
     });
   }
