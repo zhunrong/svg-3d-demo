@@ -8,7 +8,8 @@
     "types"
   ],
   "scripts": {
-    "dev": "scaffold dev"
+    "dev": "scaffold dev",
+    "build:demo": "scaffold build"
   },
   "devDependencies": {
     "@chenzr/vue-scaffold": "^0.5.1"
