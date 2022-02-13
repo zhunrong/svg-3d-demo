@@ -6,6 +6,7 @@ export abstract class Geometry {
   vertices: vec3[] = [];
   faces: Face[] = [];
   colors: string[] = [];
+  depth = 0;
 
   modelMatrix: mat4 = mat4.create();
   el = document.createElementNS('http://www.w3.org/2000/svg', 'g');

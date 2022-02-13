@@ -10,12 +10,13 @@ import {
   Cube,
   OrbitControls,
   PerspectiveCamera,
+  Tetrahedron
 } from '@package';
+
 export default Vue.extend({
   mounted() {
     const scene = new Scene(800, 800);
     scene.mount(this.$el as HTMLDivElement);
-
     const camera = new PerspectiveCamera();
     camera.setPosition(0, 0, 500);
 
@@ -23,6 +24,10 @@ export default Vue.extend({
 
     const cube1 = new Cube(100);
     scene.addChild(cube1);
+
+    const tetrahedron = new Tetrahedron(50);
+    tetrahedron.translate(-150, 0, 0);
+    scene.addChild(tetrahedron);
 
     const cube2 = new Cube(50);
     cube2.translate(100, 100, 0);
@@ -32,8 +37,9 @@ export default Vue.extend({
 
     const renderLoop = () => {
       renderer.render(scene, camera);
-      // cube.rotateX(Math.PI / 360);
-      // cube.rotateY(Math.PI / 360);
+      cube2.rotateX(Math.PI / 360);
+      cube2.rotateY(Math.PI / 360);
+      tetrahedron.rotateY(Math.PI / 360);
       requestAnimationFrame(renderLoop);
     };
 
