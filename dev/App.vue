@@ -19,6 +19,7 @@ export default Vue.extend({
     scene.mount(this.$el as HTMLDivElement);
     const camera = new PerspectiveCamera();
     camera.setPosition(0, 0, 500);
+    camera.setUp(0, 1, 0);
 
     new OrbitControls(camera, scene);
 

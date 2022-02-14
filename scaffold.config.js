@@ -4,4 +4,9 @@ module.exports = (webpackConf,type) => {
       publicPath: '/svg-3d-demo/'
     });
   }
+  if (type === 'dev') {
+    Object.assign(webpackConf.devServer, {
+      port: 3000
+    });
+  }
 };
