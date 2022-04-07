@@ -2,6 +2,8 @@ import { vec3, quat, mat4 } from 'gl-matrix';
 import { Camera } from './camera';
 import { Scene } from './scene';
 
+const UNIT_RAD = Math.PI / 180;
+
 export class OrbitControls {
   isMouseDown = false;
   quat = quat.create();
@@ -51,8 +53,8 @@ export class OrbitControls {
     vec3.add(this.focusToUp, this.focusToPosition, this.camera.up);
     this.updateMainAxis();
     this.updateCrossAxis();
-    mat4.fromRotation(this.crossRotateMatrix, -Math.PI / 180 * e.movementY, this.crossAxis);
-    mat4.fromRotation(this.mainRotateMatrix, -Math.PI / 180 * e.movementX, this.mainAxis);
+    mat4.fromRotation(this.crossRotateMatrix, -UNIT_RAD * e.movementY * 0.5, this.crossAxis);
+    mat4.fromRotation(this.mainRotateMatrix, -UNIT_RAD * e.movementX * 0.5, this.mainAxis);
     mat4.multiply(this.rotateMatrix, this.crossRotateMatrix, this.mainRotateMatrix);
     vec3.transformMat4(this.focusToPosition, this.focusToPosition, this.rotateMatrix);
     vec3.transformMat4(this.focusToUp, this.focusToUp, this.rotateMatrix);
