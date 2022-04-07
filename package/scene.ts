@@ -11,6 +11,7 @@ export class Scene {
     this.view.setAttribute('height', String(height));
     this.view.setAttribute('viewBox', `0 0 ${width} ${height}`);
     this.view.style.border = '1px dashed #ccc';
+    this.view.style.backgroundColor = '#000';
     const halfWidth = width / 2;
     const halfHeight = height / 2;
     this.view.innerHTML = `

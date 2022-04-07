@@ -1,20 +1,37 @@
 import { vec3, mat4 } from 'gl-matrix';
+import { vec3ToRgb } from './utils';
 
 export type Face = [number, number, number];
 
 export abstract class Geometry {
   vertices: vec3[] = [];
   faces: Face[] = [];
-  colors: string[] = [];
+  normals: vec3[] = [];
+  colors: vec3[] = [];
   depth = 0;
 
   modelMatrix: mat4 = mat4.create();
   el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-  constructor(vertices: vec3[], faces: Face[], colors: string[]) {
+  get normalMatrix() {
+    const matrix = mat4.create();
+    mat4.invert(matrix, this.modelMatrix);
+    mat4.transpose(matrix, matrix);
+    return matrix;
+  }
+
+  constructor(vertices: vec3[], faces: Face[], colors: vec3[]) {
     this.vertices = vertices;
     this.faces = faces;
     this.colors = colors;
+    this.normals = faces.map(face => {
+      const line1 = vec3.subtract(vec3.create(), this.vertices[face[1]], this.vertices[face[0]]);
+      const line2 = vec3.subtract(vec3.create(), this.vertices[face[2]], this.vertices[face[1]]);
+      const normal = vec3.create();
+      vec3.cross(normal, line1, line2);
+      vec3.normalize(normal, normal);
+      return normal;
+    });
     this.generatePath();
   }
 
@@ -44,7 +61,7 @@ export abstract class Geometry {
         'http://www.w3.org/2000/svg',
         'path'
       );
-      path.setAttribute('fill', this.colors[i]);
+      path.setAttribute('fill', vec3ToRgb(this.colors[i]));
       path.setAttribute('stroke', 'none');
       this.el.appendChild(path);
     }

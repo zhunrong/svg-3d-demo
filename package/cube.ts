@@ -34,19 +34,19 @@ export class Cube extends Geometry {
       [4, 6, 0],
       [0, 6, 2],
     ];
-    const colors: string[] = [
-      '#ff0000',
-      '#ff0000',
-      '#00ff00',
-      '#00ff00',
-      '#0000ff',
-      '#0000ff',
-      '#ffff00',
-      '#ffff00',
-      '#00ffff',
-      '#00ffff',
-      '#ff00ff',
-      '#ff00ff',
+    const colors: vec3[] = [
+      vec3.fromValues(255, 0, 0),
+      vec3.fromValues(255, 0, 0),
+      vec3.fromValues(0, 255, 0),
+      vec3.fromValues(0, 255, 0),
+      vec3.fromValues(0, 0, 255),
+      vec3.fromValues(0, 0, 255),
+      vec3.fromValues(255, 255, 0),
+      vec3.fromValues(255, 255, 0),
+      vec3.fromValues(0, 255, 255),
+      vec3.fromValues(0, 255, 255),
+      vec3.fromValues(255, 0, 255),
+      vec3.fromValues(255, 0, 255),
     ];
     super(vertices, faces, colors);
   }

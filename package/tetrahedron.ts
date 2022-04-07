@@ -21,11 +21,11 @@ export class Tetrahedron extends Geometry {
       [2, 0, 3],
       [1, 0, 2],
     ];
-    const colors: string[] = [
-      '#ff0000',
-      '#00ff00',
-      '#0000ff',
-      '#ffff00'
+    const colors: vec3[] = [
+      vec3.fromValues(255, 0, 0),
+      vec3.fromValues(0, 255, 0),
+      vec3.fromValues(0, 0, 255),
+      vec3.fromValues(255, 255, 0),
     ];
     super(vertices, faces, colors);
   }

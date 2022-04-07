@@ -12,7 +12,7 @@
     "build:demo": "scaffold build"
   },
   "devDependencies": {
-    "@chenzr/vue-scaffold": "^0.5.1"
+    "@chenzr/vue-scaffold": "0.7.2"
   },
   "dependencies": {
     "gl-matrix": "^3.4.3"
